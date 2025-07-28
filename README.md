@@ -1,17 +1,14 @@
-# URL Shortener Microservice
+# Logging Middleware
 
-## Features
-- Shorten long URLs with optional custom shortcode.
-- Tracks number of clicks and IP logs.
-- Expiry support (default: 30 mins).
-- Middleware logs all requests and responses.
+This folder contains a reusable Flask middleware component that logs all incoming HTTP requests with method, path, timestamp, and client IP.
 
-## API Endpoints
-### POST /shorturls
-Request:
-```json
-{
-  "url": "https://example.com",
-  "shortcode": "abc123",
-  "validity": 60
-}
+## How it works
+
+- Logs request method, path, and IP using `@app.before_request`
+- UTC timestamp is added for audit traceability
+
+## Usage
+
+```python
+from logging_middleware import logging_middleware
+logging_middleware(app)
